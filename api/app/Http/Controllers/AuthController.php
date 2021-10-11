@@ -44,9 +44,16 @@ class AuthController extends Controller
         ];
     }
 
-
+    /**
+     * Logout user
+     * @return string[]
+     */
     public function logout()
     {
+        auth()->user()->currentAccessToken()->delete();
 
+        return [
+            'message' => 'Successfully logout'
+        ];
     }
 }
