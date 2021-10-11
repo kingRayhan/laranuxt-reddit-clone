@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         return "https://www.gravatar.com/avatar/" . md5($this->attributes['email']);
     }
+
+    public function setPasswordAttribute($textPassword)
+    {
+        $this->attributes['password'] = bcrypt($textPassword);
+    }
 }
