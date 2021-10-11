@@ -19,10 +19,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-///api/auth/
 Route::group(['prefix' => 'auth'], function (){
     Route::post('register', [AuthController::class, 'register']);
     Route::post('login', [AuthController::class, 'login']);
     Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
     Route::post('update-profile', [AuthController::class, 'updateProfile'])->middleware('auth:sanctum');
+    Route::post('update-password', [AuthController::class, 'updatePassword'])->middleware('auth:sanctum');
 });
