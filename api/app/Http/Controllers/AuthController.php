@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
 
 class AuthController extends Controller
 {
@@ -83,9 +84,26 @@ class AuthController extends Controller
         \auth()->user()->update([
             'password' => $request->password
         ]);
-
         return [
             'message' => 'password updated'
         ];
+    }
+
+
+    public function forgotPassword(Request $request)
+    {
+        $request->validate([
+           'email' => ['required', 'email', 'exists:users']
+        ]);
+
+        $status = Password::sendResetLink([
+            'email' => $request->email
+        ]);
+
+        if ($status === Password::RESET_LINK_SENT){
+            return [
+                'message' => 'Password reset link sent'
+            ];
+        }
     }
 }
