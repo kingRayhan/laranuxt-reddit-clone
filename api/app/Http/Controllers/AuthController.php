@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\PasswordResetRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Models\User;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
 
@@ -23,6 +25,7 @@ class AuthController extends Controller
     public function register(RegisterRequest $request)
     {
         $user = User::create($request->only('username', 'email', 'password'));
+
 
         return [
             'message' => 'User registered successfully',
@@ -100,10 +103,39 @@ class AuthController extends Controller
             'email' => $request->email
         ]);
 
-        if ($status === Password::RESET_LINK_SENT){
-            return [
-                'message' => 'Password reset link sent'
-            ];
+        if ($status !== Password::RESET_LINK_SENT){
+            return \response()->json([
+                'message' => 'Could not sent password reset email, please try again'
+            ], Response::HTTP_FORBIDDEN);
         }
+
+        return [
+            'message' => 'Password reset link sent'
+        ];
+    }
+
+
+    /**
+     * Reset password using token
+     * @param PasswordResetRequest $request
+     * @return \Illuminate\Http\JsonResponse|string[]
+     */
+    public function resetPassword(PasswordResetRequest $request)
+    {
+        $status = Password::reset($request->only('email', 'token', 'password'), function ($user) use($request){
+            $user->update([
+                'password' => $request->password
+            ]);
+        } );
+
+        if ($status !== Password::PASSWORD_RESET){
+            return response()->json([
+                'message' => 'Could not reset your password, please try again.'
+            ], Response::HTTP_FORBIDDEN);
+        }
+
+        return [
+            'message' => 'Password updated successfully'
+        ];
     }
 }
