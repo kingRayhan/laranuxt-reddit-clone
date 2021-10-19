@@ -82,7 +82,15 @@ class AuthController extends Controller
      */
     public function updateProfile(UpdateProfileRequest $request)
     {
-        auth()->user()->update($request->only('username', 'email'));
+        $user = \auth()->user();
+        $user->fill($request->only('username', 'email'));
+
+        if($user->isDirty('email')){
+            $user->forceFill(['email_verified_at' => null]);
+            $user->sendEmailVerificationNotification();
+        }
+
+        $user->save();
 
         return [
           'message' => 'profile updated'
