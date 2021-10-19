@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -36,6 +37,7 @@ class AuthController extends Controller
     {
         $user = User::create($request->only('username', 'email', 'password'));
 
+        event(new Registered($user));
 
         return [
             'message' => 'User registered successfully',
@@ -146,6 +148,46 @@ class AuthController extends Controller
 
         return [
             'message' => 'Password updated successfully'
+        ];
+    }
+
+
+    /**
+     * Verify email address
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function verifyEmail(Request $request)
+    {
+        auth()->loginUsingId($request->id);
+
+        if($request->user()->hasVerifiedEmail()){
+            return response()->json([
+               'message' => 'You have already verify your email address'
+            ], Response::HTTP_FORBIDDEN);
+        }
+        $request->user()->markEmailAsVerified();
+
+        return redirect(env('CLIENT_URL') . '?verified=1');
+    }
+
+
+    /**
+     * Resend verification email
+     * @param Request $request
+     */
+    public function resendVerificationEmail(Request $request)
+    {
+        if($request->user()->hasVerifiedEmail()){
+            return response()->json([
+                'message' => 'You have already verify your email address'
+            ], Response::HTTP_FORBIDDEN);
+        }
+
+        $request->user()->sendEmailVerificationNotification();
+
+        return [
+            'message' => 'Verification email sent'
         ];
     }
 }
