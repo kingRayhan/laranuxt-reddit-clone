@@ -7,6 +7,7 @@ use App\Http\Requests\PasswordResetRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Requests\UpdateProfileRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
@@ -16,6 +17,15 @@ use Illuminate\Support\Facades\Password;
 
 class AuthController extends Controller
 {
+
+
+    /**
+     * Current user
+     */
+    public function user(Request $request)
+    {
+        return new UserResource(auth()->user());
+    }
 
     /**
      * Register a new user
@@ -29,7 +39,7 @@ class AuthController extends Controller
 
         return [
             'message' => 'User registered successfully',
-            'data' => $user
+            'data' => new UserResource($user)
         ];
     }
 
