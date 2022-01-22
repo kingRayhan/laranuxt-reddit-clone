@@ -6,8 +6,9 @@
         :class="{
           'border-red-500': hasError,
         }"
-        @keydown="$emit('input', $event.target.value)"
+        @change="$emit('input', $event.target.value)"
         :value="value"
+        :type="type"
         class="block w-full px-2 py-1 text-xl border focus:outline-none"
       />
       <p
@@ -41,6 +42,10 @@ export default {
     value: {
       type: String,
       required: false,
+    },
+    type: {
+      type: String,
+      default: "text",
     },
   },
 };

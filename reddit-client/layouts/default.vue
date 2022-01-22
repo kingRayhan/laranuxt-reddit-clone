@@ -2,7 +2,7 @@
   <div>
     <Navbar />
 
-    <div class="reddit-layout container">
+    <div class="container reddit-layout">
       <main class="reddit-layout__content">
         <Nuxt />
       </main>
@@ -11,5 +11,7 @@
         <sidebar />
       </aside>
     </div>
+
+    <app-footer />
   </div>
 </template>

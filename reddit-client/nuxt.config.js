@@ -1,11 +1,8 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
-  //<meta http-equiv="refresh" content="0; url=http://example.com">
-
-  //  <link >
 
   head: {
-    title: "reddit-client",
+    titleTemplate: "%s - Reddit",
     htmlAttrs: {
       lang: "en",
     },
@@ -37,7 +34,7 @@ export default {
   buildModules: ["@nuxt/postcss8"],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: ["@nuxtjs/axios"],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
@@ -47,5 +44,9 @@ export default {
         autoprefixer: {},
       },
     },
+  },
+
+  axios: {
+    baseURL: "http://api.reddit.test",
   },
 };

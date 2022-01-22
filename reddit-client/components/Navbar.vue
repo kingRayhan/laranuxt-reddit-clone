@@ -15,7 +15,7 @@
 
       <div class="navbar__user-menu" v-else>
         Want to join?
-        <nuxt-link to="/auth/login" class="link">Login</nuxt-link>
+        <nuxt-link to="/auth/signin" class="link">Signin</nuxt-link>
         or
         <nuxt-link to="/auth/signup" class="link">Signup</nuxt-link>
         in a seconds.
