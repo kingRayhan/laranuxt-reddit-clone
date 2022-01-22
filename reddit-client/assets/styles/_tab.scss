@@ -1,0 +1,12 @@
+.thread-editor-tabs {
+  ul {
+    @apply flex border-b-4 border-primaryDark mb-2;
+    li {
+      @apply bg-primary px-2 font-bold text-xl cursor-pointer;
+
+      &.active {
+        @apply bg-primaryDark px-2 font-bold text-white;
+      }
+    }
+  }
+}

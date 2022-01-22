@@ -1,0 +1,29 @@
+.logos {
+  background-image: url("~static/images/logos.png");
+  background-repeat: no-repeat;
+  height: 50px;
+  width: 50px;
+  &--logo-link {
+    background-position: -10px -1099px;
+  }
+  &--logo-post {
+    background-position: -10px -1267px;
+  }
+}
+
+.icons {
+  background-image: url("~static/images/icons.png");
+  background-repeat: no-repeat;
+  height: 23px;
+  width: 23px;
+  &--icon-post {
+    background-position: 0px -549px;
+
+    &--active {
+      background-position: 0px -404px;
+    }
+  }
+  &--icon-notification {
+    background-position: 0px -549px;
+  }
+}

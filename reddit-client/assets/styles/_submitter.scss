@@ -1,0 +1,35 @@
+.submitter-button {
+  display: block;
+  text-align: center;
+  position: relative;
+  border: 1px solid #c4dbf1;
+  background: #ffffff none repeat-x scroll center left;
+  background-image: url("~static/images/logos.png");
+  background-position: 0px -278px;
+  background-repeat: repeat;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  line-height: 29px;
+  height: 31px;
+
+  span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #369;
+  }
+  .nub {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    height: 31px;
+    width: 24px;
+    background: #ffffff none no-repeat scroll center left;
+    background-image: url("~static/images/logos.png");
+    background-position: -61px -1369px;
+    background-repeat: no-repeat;
+  }
+}

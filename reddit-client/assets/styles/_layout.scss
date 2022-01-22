@@ -1,0 +1,10 @@
+.reddit-layout {
+  @apply grid grid-cols-12 mx-auto;
+
+  &__content {
+    @apply col-span-9 pr-5;
+  }
+  &__sidebar {
+    @apply col-span-3;
+  }
+}
