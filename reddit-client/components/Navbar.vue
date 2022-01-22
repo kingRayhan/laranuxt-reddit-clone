@@ -17,7 +17,7 @@
         Want to join?
         <nuxt-link to="/auth/login" class="link">Login</nuxt-link>
         or
-        <nuxt-link to="/auth/register" class="link">Signup</nuxt-link>
+        <nuxt-link to="/auth/signup" class="link">Signup</nuxt-link>
         in a seconds.
       </div>
     </div>
