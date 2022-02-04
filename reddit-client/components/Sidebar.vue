@@ -1,8 +1,8 @@
 <template>
   <div>
-    <widgets-login />
+    <widgets-login v-if="!$auth.loggedIn" />
 
-    <div>
+    <div v-if="$auth.loggedIn">
       <nuxt-link class="mb-4 submitter-button" to="/new">
         <span>Submit now</span>
         <div class="nub"></div>
