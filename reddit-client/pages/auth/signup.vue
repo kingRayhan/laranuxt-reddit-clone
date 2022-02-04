@@ -4,10 +4,6 @@
       Create a new account
     </h1>
 
-    <pre>
-      {{ errors }}
-    </pre>
-
     <form action="#" @submit.prevent="handleSubmit" class="mt-6">
       <form-input
         label="Username"
@@ -67,9 +63,16 @@ export default {
         this.loading = true;
         const res = await this.$axios.$post("/api/auth/register", this.form);
         this.loading = false;
+        this.$store.commit("toast/fire", {
+          text: "Successfully created a new account. Please check your email to verify your account.",
+        });
         this.$router.push("/");
         console.log(res);
       } catch (e) {
+        this.$store.commit("toast/fire", {
+          text: e.response.data.message,
+          type: "error",
+        });
         this.errors = e.response.data?.errors || {};
         this.loading = false;
       }
