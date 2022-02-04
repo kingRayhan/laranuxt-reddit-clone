@@ -34,7 +34,7 @@ export default {
   buildModules: ["@nuxt/postcss8"],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["@nuxtjs/axios"],
+  modules: ["@nuxtjs/axios", "@nuxtjs/auth-next"],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
@@ -48,5 +48,26 @@ export default {
 
   axios: {
     baseURL: "http://api.reddit.test",
+  },
+
+  auth: {
+    redirect: {
+      login: "/login",
+      logout: "/auth/login",
+      callback: "/login",
+      home: "/",
+    },
+    strategies: {
+      local: {
+        user: {
+          property: "data",
+        },
+        endpoints: {
+          login: { url: "/api/auth/login", method: "post" },
+          logout: { url: "/api/auth/logout", method: "post" },
+          user: { url: "/api/auth/user", method: "get" },
+        },
+      },
+    },
   },
 };

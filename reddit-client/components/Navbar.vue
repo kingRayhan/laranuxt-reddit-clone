@@ -1,18 +1,21 @@
 <template>
   <div>
     <toast />
+
     <nav class="navbar">
       <div class="container navbar__inner">
         <nuxt-link class="navbar__logo" to="/"></nuxt-link>
 
-        <div class="navbar__user-menu" v-if="isloggedIn">
+        <div class="navbar__user-menu" v-if="$auth.loggedIn">
           Howdy
-          <a class="font-bold" href="#"> /r/rayhan </a>
+          <a class="font-bold" href="#">{{ $auth.user.username }} </a>
           <a class="text-xs text-gray-700" href="#"> (settings) </a>
           <span class="font-thin">|</span>
           <a href="#" to="/notifications"> Notifications (14) </a>
           <span class="font-thin">|</span>
-          <a href="#" class="cursor-pointer">Logout</a>
+          <button @click="handleLogout" class="cursor-pointer link">
+            Logout
+          </button>
         </div>
 
         <div class="navbar__user-menu" v-else>
@@ -29,10 +32,10 @@
 
 <script>
 export default {
-  data() {
-    return {
-      isloggedIn: false,
-    };
+  methods: {
+    handleLogout() {
+      this.$auth.logout();
+    },
   },
 };
 </script>

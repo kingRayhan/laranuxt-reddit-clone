@@ -1,4 +1,9 @@
 export default {
+  data() {
+    return {
+      errors: {},
+    };
+  },
   methods: {
     errorMsg(key) {
       return this.errors[key] != undefined

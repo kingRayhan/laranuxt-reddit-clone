@@ -52,7 +52,6 @@ export default {
         password: "",
         password_confirmation: "",
       },
-      errors: {},
       loading: false,
     };
   },
