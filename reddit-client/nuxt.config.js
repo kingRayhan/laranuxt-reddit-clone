@@ -52,9 +52,9 @@ export default {
 
   auth: {
     redirect: {
-      login: "/login",
+      login: "/auth/signin",
       logout: "/auth/signin",
-      callback: "/login",
+      callback: "/auth/signin",
       home: "/",
     },
     strategies: {

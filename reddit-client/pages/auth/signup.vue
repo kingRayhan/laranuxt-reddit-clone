@@ -44,6 +44,7 @@ export default {
     title: "Signup",
   },
   mixins: [form],
+  middleware: "guest",
   data() {
     return {
       form: {

@@ -2,6 +2,10 @@
   <div>
     <widgets-login v-if="!$auth.loggedIn" />
 
+    <widgets-email-verification-status
+      v-if="$auth.loggedIn && !$auth.user.email_verified"
+    />
+
     <div v-if="$auth.loggedIn">
       <nuxt-link class="mb-4 submitter-button" to="/new">
         <span>Submit now</span>

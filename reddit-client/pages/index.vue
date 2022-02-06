@@ -11,5 +11,13 @@
 <script>
 export default {
   name: "IndexPage",
+  mounted() {
+    if (this.$route.query.verified) {
+      this.$store.commit("toast/fire", {
+        text: "Your email address has been verified.",
+        type: "success",
+      });
+    }
+  },
 };
 </script>
