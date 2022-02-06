@@ -9,7 +9,9 @@
         <div class="navbar__user-menu" v-if="$auth.loggedIn">
           Howdy
           <a class="font-bold" href="#">{{ $auth.user.username }} </a>
-          <a class="text-xs text-gray-700" href="#"> (settings) </a>
+          <nuxt-link class="text-xs text-gray-700" to="/settings">
+            (settings)
+          </nuxt-link>
           <span class="font-thin">|</span>
           <a href="#" to="/notifications"> Notifications (14) </a>
           <span class="font-thin">|</span>

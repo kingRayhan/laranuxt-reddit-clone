@@ -44,6 +44,7 @@ export default {
   methods: {
     async handleSubmit() {
       try {
+        this.errors = {};
         this.loading = true;
         await this.$auth.loginWith("local", { data: this.form });
         this.loading = false;
