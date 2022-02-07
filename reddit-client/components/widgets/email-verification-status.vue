@@ -59,7 +59,10 @@ export default {
         });
       } catch (error) {
         this.loading = false;
-        console.log(error.response.data);
+        this.$store.commit("toast/fire", {
+          text: error.response.data.message,
+          type: "error",
+        });
       }
     },
   },

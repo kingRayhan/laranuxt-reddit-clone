@@ -11,6 +11,9 @@
 <script>
 export default {
   name: "IndexPage",
+  head: {
+    title: "Home",
+  },
   mounted() {
     if (this.$route.query.verified) {
       this.$store.commit("toast/fire", {

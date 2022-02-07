@@ -58,6 +58,9 @@ import form from "~/mixins/form";
 export default {
   middleware: ["auth"],
   mixins: [form],
+  head: {
+    title: "Settings",
+  },
   data() {
     return {
       profile: {
@@ -99,8 +102,10 @@ export default {
         this.loading_password = true;
         await this.$axios.$put("/api/auth/update-password", this.pass);
         this.loading_password = false;
+        this.$auth.logout();
         this.$store.commit("toast/fire", {
-          text: "Successfully updated password",
+          text: "Successfully updated password. Please login again.",
+          type: "success",
         });
       } catch (error) {
         this.loading_password = false;
